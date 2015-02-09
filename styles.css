@@ -2,7 +2,7 @@ body {
   background: url('debut_light.png')
 }
 
-#container {
+.container {
   width: 600px;
   font-family: 'Titillium Web', 'Arial', sans-serif;
   font-size: 40px;
@@ -31,12 +31,9 @@ form {
   width: 100%;
   font-family: inherit;
   font-size: inherit;
-  padding: 10px 30px;
-  border-left:    1px  solid #7d82b0;
-  border-right:   1px  solid #7d82b0;
-  border-bottom:  2px  solid #7d82b0;
-  border-top:     15px solid #477187;
+  padding: 10px 0;
   text-align: center;
+  border: none;
 }
 
 
@@ -105,4 +102,12 @@ form {
 
 #templates {
   display: none
+}
+
+footer {
+  position: fixed;
+  background-color: #477187;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }

@@ -33,6 +33,7 @@ $(document).ready(function() {
     $('#list').empty();
 
     $.get(url, function(data) {
+      console.log(data);
       var items = data.items;
 
       // loop through items and append to list for display
@@ -103,7 +104,7 @@ $(document).ready(function() {
     var item = $(this).parent(),
         itemId = item.attr('data-id');
 
-    $(this).attr('contentEditable', true);
+    //$(this).attr('contentEditable', true);
   });
 
   // deleting an item from list
