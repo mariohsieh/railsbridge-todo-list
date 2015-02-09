@@ -13,26 +13,59 @@ $(document).ready(function() {
    */
 
   function addItemToPage(itemData) {
-/*
-    var item = itemTemplate.clone();
-    item.attr('data-id',itemData.id);
-    item.find('.description').text(itemData.description);
-    item.find('.createdTime').text(itemData.created_at);
-    if(itemData.updated_at) {
-        item.find('.createdTime').text(itemData.updated_at);
-    }
-    if(itemData.completed) {
-      item.addClass('completed');
-    }
-*/
+
     var newItem = '<li class="item" data-id="itemData.id">';
     newItem += '<span class="complete-button">&#10004;</span>';
     newItem += '<div class="description">'+itemData.description+'</div>';
-    newItem += '<span class="delete-button">&#10004;</span>';
-    newItem += '<span class="updatedTime disp-ib">Updated On: '+itemData.updated_at+'</span>';
+    newItem += '<span class="delete-button">&#10008;</span>';
+    newItem += '<span class="updatedTime">'+formatDate(itemData.updated_at)+'</span>';
     newItem += '</li>';
     list.append(newItem);
   }
+
+    // formatupdated date for display
+    function formatDate(timeStamp) {
+
+    	function addZero(num) {
+    		if (num < 10)
+    			return "0" + num;
+    		else
+    			return num;
+    	}
+
+    	if (timeStamp) {
+    		var showDate = new Date(timeStamp);
+    		var editStatus = "Updated on ";
+    	} else	{
+    		var showDate = new Date(timeStamp);
+    		var editStatus = "Created on ";
+    	}
+
+    	var yy = showDate.getFullYear().toString();
+    	var mm = addZero(showDate.getMonth()+1);
+    	var dd = addZero(showDate.getDate());
+    	var hh = addZero(showDate.getHours());
+    	var mins = addZero(showDate.getMinutes());
+    	var ss = addZero(showDate.getSeconds());
+
+    	// change to 12-hour clock and add am/pm
+    	var ampm = "am";
+    	if (hh == "00")
+    		hh = 12;
+    	if (hh == 12)
+    		ampm = "pm";
+    	if (hh > 12) {
+    		ampm = "pm";
+    		hh -= 12;
+    	}
+
+    	showDate = yy + "/" + mm + "/" + dd + " at " + hh + ":" + mins + ampm;
+    	//console.log(yy, mm, dd, hh, min);
+
+    	showDate = editStatus + showDate;
+
+    	return showDate;
+    }
 
 
   /*
