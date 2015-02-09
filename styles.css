@@ -144,3 +144,9 @@ footer .createIcon {
 .delete-button:hover {
     color: red;
 }
+
+.updatedTime {
+    font-size: .4em;
+    width: 100%;
+    text-align: right;
+}

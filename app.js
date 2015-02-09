@@ -13,14 +13,27 @@ $(document).ready(function() {
    */
 
   function addItemToPage(itemData) {
+/*
     var item = itemTemplate.clone();
     item.attr('data-id',itemData.id);
     item.find('.description').text(itemData.description);
+    item.find('.createdTime').text(itemData.created_at);
+    if(itemData.updated_at) {
+        item.find('.createdTime').text(itemData.updated_at);
+    }
     if(itemData.completed) {
       item.addClass('completed');
     }
-    list.append(item);
+*/
+    var newItem = '<li class="item" data-id="itemData.id">';
+    newItem += '<span class="complete-button">&#10004;</span>';
+    newItem += '<div class="description">'+itemData.description+'</div>';
+    newItem += '<span class="delete-button">&#10004;</span>';
+    newItem += '<span class="updatedTime disp-ib">Updated On: '+itemData.updated_at+'</span>';
+    newItem += '</li>';
+    list.append(newItem);
   }
+
 
   /*
    *  api calls
@@ -32,13 +45,15 @@ $(document).ready(function() {
     $('#list').empty();
 
     $.get(url, function(data) {
-      console.log(data);
       var items = data.items;
-
+      console.log(items);
       // loop through items and append to list for display
       items.forEach(function(item) {
         addItemToPage(item);
       });
+
+      // make list sortable
+      //$('#list').sortable();
     });
   }
 
@@ -126,8 +141,12 @@ $(document).ready(function() {
     var item = $(this).parent(),
         itemId = item.attr('data-id');
 
-    // make api call to delete request
-    deleteItemRequest(item, itemId);
+    // confirm with user to delete item
+    var confirmDelete = confirm('Are you sure you want to delete this item?');
+
+    // make api call to delete request if true
+    if (confirmDelete)
+        deleteItemRequest(item, itemId);
   });
 
   // hover over input event
