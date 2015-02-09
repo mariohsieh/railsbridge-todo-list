@@ -7,7 +7,8 @@ body {
   font-family: 'Titillium Web', 'Arial', sans-serif;
   font-size: 40px;
   text-align: center;
-  margin: 40px auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 h1 {
@@ -34,6 +35,7 @@ form {
   padding: 10px 0;
   text-align: center;
   border: none;
+  display: none;
 }
 
 
@@ -104,10 +106,33 @@ form {
   display: none
 }
 
+/*  additional styles  */
+
+main {
+  margin: 40px auto 175px;
+}
+
 footer {
   position: fixed;
   background-color: #477187;
   right: 0;
   bottom: 0;
   left: 0;
+  padding: 20px 0;
+}
+
+/*
+footer:hover {
+  padding: 40px 0;
+}
+*/
+
+footer .createIcon {
+  display: block;
+  color: #fff;
+  transform: scale(-1, 1);
+}
+
+.disp-ib {
+  display: inline-block;
 }

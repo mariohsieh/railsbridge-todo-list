@@ -87,6 +87,7 @@ $(document).ready(function() {
     var itemDescription = event.target.itemDescription.value;
     // call method to add new item
     addNewItemRequest(itemDescription);
+    $('#create').text('');
   });
 
   // marking an item as complete on click
@@ -116,6 +117,18 @@ $(document).ready(function() {
     deleteItemRequest(item, itemId);
   });
 
+  // hover over input event
+  $(document).on('mouseover','footer', function() {
+    $(this).css('padding', '40px 0');
+    $('.createIcon').hide();
+    $('#create').show();
+  });
+
+  $(document).on('mouseout','footer', function() {
+    $(this).css('padding', '20px 0');
+    $('.createIcon').show();
+    $('#create').hide();
+  });
 
   /*
    *  on page load

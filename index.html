@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
   <head>
+    <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link href='https://fonts.googleapis.com/css?family=Titillium+Web:600' rel='stylesheet' type='text/css'>
     <script src="https://code.jquery.com/jquery-2.1.3.js"></script>
@@ -24,17 +25,18 @@
 -->
         </ul>
       </div>
-    </div>
+    </main>
 
-    <div id='templates'>
+    <article id='templates'>
       <li class='item' data-id="some id">
         <span class='complete-button'>&#10004;</span>
         <div class="description">A stick of butter</div>
         <span class="delete-button">&#10008;</span>
       </li>
-    </div>
+    </article>
     <footer>
       <form id='add-form' class="container">
+        <span class="createIcon">&#9998;</span>
         <input id="create" name="itemDescription" type="text" placeholder="Add something to the list!">
       </form>
     </footer>
