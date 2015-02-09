@@ -62,6 +62,18 @@ $(document).ready(function() {
       }
     });
   }
+
+  function deleteItemRequest(item, id) {
+    $.ajax({
+      type: 'DELETE',
+      url: url + 'items/' + id,
+      success: function(data) {
+        item.remove();
+      }
+    });
+  }
+
+
   /*
    *  event handlers
    */
@@ -77,14 +89,32 @@ $(document).ready(function() {
   });
 
   // marking an item as complete on click
-  $(document).on('click','.complete-button', function(event) {
-    var item = $(event.target).parent(),
+  $(document).on('click','.complete-button', function() {
+    var item = $(this).parent(),
         itemId = item.attr('data-id'),
         isItemCompleted = item.hasClass('completed');
 
     // make api call to update request
     updateRequest(item, itemId, isItemCompleted);
   });
+
+  // editing an item description
+  $(document).on('click','.description', function() {
+    var item = $(this).parent(),
+        itemId = item.attr('data-id');
+
+    $(this).attr('contentEditable', true);
+  });
+
+  // deleting an item from list
+  $(document).on('click','.delete-button', function() {
+    var item = $(this).parent(),
+        itemId = item.attr('data-id');
+
+    // make api call to delete request
+    deleteItemRequest(item, itemId);
+  });
+
 
   /*
    *  on page load
