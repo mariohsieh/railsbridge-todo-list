@@ -28,7 +28,6 @@ $(document).ready(function() {
 
   // api call to get list items
   function getListRequest() {
-
     // clear list first
     $('#list').empty();
 
@@ -46,14 +45,13 @@ $(document).ready(function() {
   // api call to add new item
   function addNewItemRequest(descriptionData) {
     $.post(url+'items', { description: descriptionData, completed: false }, function(data) {
-
       // after successful request, add new item to list
       addItemToPage(data);
     });
   }
 
   // api call to mark item as completed
-  function updateRequest(item, id, isCompleted) {
+  function completeRequest(item, id, isCompleted) {
     $.ajax({
       type: 'PUT',
       url: url + 'items/' + id,
@@ -64,12 +62,25 @@ $(document).ready(function() {
     });
   }
 
+  // api call to delete list item
   function deleteItemRequest(item, id) {
     $.ajax({
       type: 'DELETE',
       url: url + 'items/' + id,
       success: function(data) {
         item.remove();
+      }
+    });
+  }
+
+  // api call to edit item description
+  function updateRequest(item, id, descriptionData) {
+    $.ajax({
+      type: 'PUT',
+      url: url + 'items/' + id,
+      data: { description: descriptionData },
+      success: function(data) {
+        console.log(data);
       }
     });
   }
@@ -97,15 +108,17 @@ $(document).ready(function() {
         isItemCompleted = item.hasClass('completed');
 
     // make api call to update request
-    updateRequest(item, itemId, isItemCompleted);
+    completeRequest(item, itemId, isItemCompleted);
   });
 
   // editing an item description
   $(document).on('click','.description', function() {
     var item = $(this).parent(),
-        itemId = item.attr('data-id');
+        itemId = item.attr('data-id'),
+        text = $(this).text();
 
     //$(this).attr('contentEditable', true);
+    //updateRequest(item, itemId, text);
   });
 
   // deleting an item from list
