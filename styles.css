@@ -136,3 +136,11 @@ footer .createIcon {
 .disp-ib {
   display: inline-block;
 }
+
+.complete-button:hover {
+    color: green;
+}
+
+.delete-button:hover {
+    color: red;
+}
