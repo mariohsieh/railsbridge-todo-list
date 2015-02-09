@@ -28,6 +28,10 @@ $(document).ready(function() {
 
   // api call to get list items
   function getListRequest() {
+
+    // clear list first
+    $('#list').empty();
+
     $.get(url, function(data) {
       var items = data.items;
 
@@ -47,22 +51,40 @@ $(document).ready(function() {
     });
   }
 
-
+  // api call to mark item as completed
+  function updateRequest(item, id, isCompleted) {
+    $.ajax({
+      type: 'PUT',
+      url: url + 'items/' + id,
+      data: { completed: !isCompleted },
+      success: function(data) {
+        (data.completed) ? item.addClass('completed') : item.removeClass('completed');
+      }
+    });
+  }
   /*
    *  event handlers
    */
 
+  // add new item on submit
   $(document).on('submit','#add-form',function(event) {
     // cancel submission process
     event.preventDefault();
     // save text from input field
     var itemDescription = event.target.itemDescription.value;
-
     // call method to add new item
     addNewItemRequest(itemDescription);
   });
 
+  // marking an item as complete on click
+  $(document).on('click','.complete-button', function(event) {
+    var item = $(event.target).parent(),
+        itemId = item.attr('data-id'),
+        isItemCompleted = item.hasClass('completed');
 
+    // make api call to update request
+    updateRequest(item, itemId, isItemCompleted);
+  });
 
   /*
    *  on page load
